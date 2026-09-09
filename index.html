@@ -225,7 +225,7 @@
    ========================================================================= */
 const PROJETO = {
   atualizadoEm: "09/09/2026",
-  briefingUrl: "https://briefing-solarmar.vercel.app/",
+  materiaisUrl: "https://solarmar-materiais.vercel.app/",
   previewUrl: "",        // "" esconde o bloco de prévia
   aguardandoCliente: "Envio das informações técnicas e dos materiais solicitados.",
 
@@ -325,9 +325,9 @@ const PROJETO = {
   // Banners
   const banners = document.getElementById('banners');
   let bHtml = '';
-  if (PROJETO.briefingUrl && PROJETO.briefingUrl.trim()) {
-    bHtml += '<div class="banner banner-live"><span class="ico">📋</span><div><strong>Briefing disponível para preenchimento.</strong><br>' +
-             '<a class="preview-btn" href="' + PROJETO.briefingUrl + '" target="_blank" rel="noopener">Acessar briefing →</a>' +
+  if (PROJETO.materiaisUrl && PROJETO.materiaisUrl.trim()) {
+    bHtml += '<div class="banner banner-live"><span class="ico">📁</span><div><strong>Coleta de informações e materiais disponível.</strong><br>' +
+             '<a class="preview-btn" href="' + PROJETO.materiaisUrl + '" target="_blank" rel="noopener">Acessar coleta de materiais →</a>' +
              '</div></div>';
   }
   if (PROJETO.aguardandoCliente && PROJETO.aguardandoCliente.trim()) {

@@ -224,15 +224,15 @@
    item:   done:true (✓) | done:false (a fazer) | wait:true (aguardando cliente)
    ========================================================================= */
 const PROJETO = {
-  atualizadoEm: "09/09/2026",
-  materiaisUrl: "https://solarmar-materiais.vercel.app/",
+  atualizadoEm: "29/09/2026",
+  materiaisUrl: "",
   previewUrl: "",        // "" esconde o bloco de prévia
-  aguardandoCliente: "Envio das informações técnicas e dos materiais solicitados.",
+  aguardandoCliente: "Materiais complementares (BESS, Solarcharge, certificações, identidade visual) seguem em coleta — não bloqueia o andamento.",
 
   fases: [
     {
       titulo: "Preparação e coleta de informações",
-      status: "doing",
+      status: "done",
       desc: "Alinhamento do projeto e reunião das informações necessárias para as duas entregas.",
       itens: [
         { t: "Reunião inicial e definição do escopo", done: true },
@@ -241,17 +241,17 @@ const PROJETO = {
         { t: "Link do briefing enviado", done: true },
         { t: "Preenchimento e envio do briefing pela SolarMar", done: true },
         { t: "Envio do link para coleta das informações técnicas e dos materiais", done: true },
-        { t: "Recebimento das informações técnicas e dos materiais", done: false }
+        { t: "Recebimento das informações técnicas e dos materiais (recebido parcialmente — o essencial já cobre a estratégia)", done: true }
       ]
     },
     {
       titulo: "Entrega 1 — Planejamento da Landing Page",
-      status: "todo",
-      desc: "Início da primeira entrega após a coleta e análise das informações.",
+      status: "doing",
+      desc: "Estrutura e copy v1 da Solarcharge prontos — aguardando revisão da Marina e materiais complementares (fotos, cases autorizados).",
       itens: [
-        { t: "Análise do briefing e dos materiais", done: false },
-        { t: "Definição da estrutura da Landing Page", done: false },
-        { t: "Produção dos textos estratégicos", done: false },
+        { t: "Análise do briefing e dos materiais", done: true },
+        { t: "Definição da estrutura da Landing Page", done: true },
+        { t: "Produção dos textos estratégicos", done: true },
         { t: "Organização das imagens e informações técnicas", done: false }
       ]
     },

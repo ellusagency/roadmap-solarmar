@@ -154,6 +154,12 @@
   .check.on{ color:var(--green); }
   .check.off{ color:var(--line); }
   .check.wait{ color:var(--amber); }
+  .check.doing{ color:var(--green); }
+  .badge-doing-item{
+    background:rgba(34,160,90,.12); color:var(--green);
+    font-size:10.5px; padding:2px 7px; border-radius:20px;
+    font-weight:700; margin-left:6px; white-space:nowrap;
+  }
 
   /* ---------- FOOTER ---------- */
   .foot{
@@ -227,7 +233,7 @@ const PROJETO = {
   atualizadoEm: "29/09/2026",
   materiaisUrl: "",
   previewUrl: "",        // "" esconde o bloco de prévia
-  aguardandoCliente: "Materiais complementares (BESS, Solarcharge, certificações, identidade visual) seguem em coleta — não bloqueia o andamento.",
+  aguardandoCliente: "Fotos da empresa, dos projetos e materiais visuais complementares.",
 
   fases: [
     {
@@ -247,20 +253,20 @@ const PROJETO = {
     {
       titulo: "Entrega 1 — Planejamento da Landing Page",
       status: "doing",
-      desc: "Estrutura e copy v1 da Solarcharge prontos — aguardando revisão da Marina e materiais complementares (fotos, cases autorizados).",
+      desc: "Estrutura e textos concluídos. Organização das imagens em andamento, aguardando os materiais complementares da SolarMar.",
       itens: [
         { t: "Análise do briefing e dos materiais", done: true },
         { t: "Definição da estrutura da Landing Page", done: true },
         { t: "Produção dos textos estratégicos", done: true },
-        { t: "Organização das imagens e informações técnicas", done: false }
+        { t: "Organização das imagens e informações técnicas", done: false, doing: true }
       ]
     },
     {
       titulo: "Entrega 1 — Design e desenvolvimento",
-      status: "todo",
+      status: "doing",
       desc: "Construção da Landing Page Solarcharge, com prazo de até 15 dias úteis.",
       itens: [
-        { t: "Criação do layout visual", done: false },
+        { t: "Criação do layout visual", done: false, doing: true },
         { t: "Desenvolvimento da Landing Page", done: false },
         { t: "Adaptação para celular, tablet e computador", done: false },
         { t: "Configuração dos recursos e contatos", done: false }
@@ -310,12 +316,14 @@ const PROJETO = {
   // Progresso = itens concluídos / total de itens
   const todos = PROJETO.fases.flatMap(f => f.itens);
   const feitos = todos.filter(i => i.done).length;
-  const pct = todos.length ? Math.round((feitos / todos.length) * 100) : 0;
+  const andamento = todos.filter(i => !i.done && i.doing).length;
+  const pct = todos.length ? Math.round(((feitos + andamento * 0.5) / todos.length) * 100) : 0;
 
   document.getElementById('pct').textContent = pct + '%';
   setTimeout(() => { document.getElementById('barFill').style.width = pct + '%'; }, 120);
   document.getElementById('progressSub').innerHTML =
-    '<strong>' + feitos + ' de ' + todos.length + '</strong> etapas concluídas.';
+    '<strong>' + feitos + ' de ' + todos.length + '</strong> etapas concluídas' +
+    (andamento ? ' · <strong>' + andamento + '</strong> em andamento' : '') + '.';
   document.getElementById('updatedAt').textContent = PROJETO.atualizadoEm;
   document.getElementById('heroUpdated').textContent = PROJETO.atualizadoEm;
 
@@ -350,6 +358,8 @@ const PROJETO = {
       if (it.wait) return '<li class="pending"><span class="check wait">⏳</span><span>' + it.t +
                           ' <span class="badge badge-wait">aguardando você</span></span></li>';
       if (it.done) return '<li><span class="check on">✓</span><span>' + it.t + '</span></li>';
+      if (it.doing) return '<li><span class="check doing">●</span><span>' + it.t +
+                          ' <span class="badge-doing-item">em andamento</span></span></li>';
       return '<li class="pending"><span class="check off">○</span><span>' + it.t + '</span></li>';
     }).join('');
     return '<div class="phase ' + f.status + '">' +
